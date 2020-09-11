@@ -2,10 +2,10 @@
 
 version       = "0.1.0"
 author        = "Tom Dobbelaere"
-description   = "Alien-8 is a fantasy console"
+description   = "Digaly's Engine"
 license       = "GPL-2.0"
 srcDir        = "src"
-bin           = @["alien8"]
+bin           = @["dengine"]
 
 # Dependencies
 

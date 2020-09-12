@@ -1,0 +1,6 @@
+{
+  "editor.tabSize": 2,
+  "nim.nimprettyMaxLineLen": 80,
+  "nim.nimprettyIndent": 2,
+  "editor.formatOnSave": true
+}

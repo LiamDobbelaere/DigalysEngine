@@ -1,11 +1,15 @@
 import tables
 
 type Opcode* = enum
-  OUT = 1, ## PSH [value]  - push a value to the stack
+  ADD = 1, ## add the top two values on the stack
+  PSH = 2  ## push the next value to the stack
 
-const stringToOpcode = { ## Quick conversion table to convert strings to opcodes
-  "out": Opcode.OUT,
+let stringToOpcode* = { ## Quick conversion table to convert strings to opcodes
+  "add": Opcode.ADD,
 }.toTable
 
 proc toOpcode*(str: string): Opcode =
   result = stringToOpcode[str]
+
+proc validOpcode*(str: string): bool =
+  result = str in stringToOpcode

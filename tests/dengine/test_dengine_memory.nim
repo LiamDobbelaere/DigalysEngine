@@ -28,8 +28,8 @@ suite "DEngineMmemory":
 
   test "size initialization":
     memory.init(64)
-    doAssert memory.len == 64
+    doAssert memory.size == 64
 
     memory.init(4096)
-    doAssert memory.len == 4096
+    doAssert memory.size == 4096
 

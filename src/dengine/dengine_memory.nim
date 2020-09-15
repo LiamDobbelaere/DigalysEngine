@@ -19,9 +19,14 @@ proc put*(self: DEngineMemory, i: int, values: seq[uint8]) =
     self.memory[i + idx] = val
 
 proc get*(self: DEngineMemory, i: int): uint8 =
-  ## Retreive a value in memory
+  ## Retrieve a value in memory
   result = self.memory[i]
 
-proc len*(self: DEngineMemory): int =
-  ## Get the total size of available memory
+# TODO: test
+proc max*(self: DEngineMemory): int =
+  ## Get the highest possible address in memory
+  result = self.memory.len - 1
+
+proc size*(self: DEngineMemory): int =
+  ## Get the total size of memory
   result = self.memory.len

@@ -5,7 +5,7 @@
 - Binary mode  
   Note: Liberties should be taken here where necessary, it's not the goal to be 100% realistic
   - ~~Memory: Fixed size at runtime, but adjustable through params~~
-  - Compiler: Compile `den` files to bytecode, start with simple instruction set (output?)
+  - ~~Compiler: Compile `den` files to bytecode, start with simple instruction set (output?)~~
   - Runtime: Load program instructions into memory
   - I/O: output to stdout (numbers/bytes)
   - Code: data segments

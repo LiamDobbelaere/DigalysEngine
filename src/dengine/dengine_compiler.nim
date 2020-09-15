@@ -4,7 +4,7 @@ import strutils
 
 type
   DEngineCompiler* = ref object
-    ## Compiles den code to denb (bytecode that can be executed by the runtime directly)
+    ## Compiles DEN code to DENB (bytecode that can be executed by the runtime directly)
 
 proc init*(self: DEngineCompiler) =
   ## Initialize DEngineCompiler
@@ -13,15 +13,15 @@ proc init*(self: DEngineCompiler) =
 proc parseNonOpcode(self: DEngineCompiler, instruction: string): seq[uint8] =
   if instruction.contains("."):
     # float constant
-    result.add(Opcode.PSH.ord)
-    result.add(parseFloat(instruction).toBytes)
+    result.add(Opcode.PSHF.ord)
+    result.add(((float32)parseFloat(instruction)).toBytes)
   else:
     # signed integer constant
-    result.add(Opcode.PSH.ord)
+    result.add(Opcode.PSHI.ord)
     result.add(((int32)parseInt(instruction)).toBytes)
 
 proc compileInstruction(self: DEngineCompiler, instruction: string): seq[uint8] =
-  ## Compiles a single '.den' instruction, like 'add'
+  ## Compiles a single DEN instruction, like 'addi'
   result = @[]
 
   if instruction.validOpcode:
@@ -31,7 +31,6 @@ proc compileInstruction(self: DEngineCompiler, instruction: string): seq[uint8] 
     # Assume this is a constant or variable reference being pushed
     result.add(self.parseNonOpcode(instruction))
 
-# TODO: test
 proc compile*(self: DEngineCompiler, source: string): seq[uint8] =
   ## Source is expected to be '.den' code
   result = @[]

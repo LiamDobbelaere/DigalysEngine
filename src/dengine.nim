@@ -1,5 +1,5 @@
 import dengine/dengine_compiler
-import dengine/dengine_utils
+import dengine/dengine_runtime
 
 when isMainModule:
   # var p = parseopt.initOptParser(os.commandLineParams())
@@ -22,10 +22,15 @@ when isMainModule:
   let compiler = DEngineCompiler()
   compiler.init()
 
-  echo compiler.compile("""
-    5.54
-    1.12
-    add
+  let compiledCode = compiler.compile("""
+    addi
   """)
+
+  let runtime = DEngineRuntime()
+  runtime.init()
+
+  runtime.load(compiledCode)
+  runtime.tick()
+
 
 

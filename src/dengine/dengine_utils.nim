@@ -1,9 +1,11 @@
+# Float32 <=> byte representation conversion
 proc toBytes*(num: float32): array[4, uint8] =
   result = cast[array[4, uint8]](num)
 
 proc toFloat32*(bytes: array[4, uint8]): float32 =
   result = cast[float32](bytes)
 
+# Int32 <=> byte representation conversion
 proc toBytes*(num: int32): array[4, uint8] =
   result = cast[array[4, uint8]](num)
 

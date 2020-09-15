@@ -10,6 +10,16 @@ proc init*(self: DEngineCompiler) =
   ## Initialize DEngineCompiler
   discard
 
+proc parseNonOpcode(self: DEngineCompiler, instruction: string): seq[uint8] =
+  if instruction.contains("."):
+    # float constant
+    result.add(Opcode.PSH.ord)
+    result.add(parseFloat(instruction).toBytes)
+  else:
+    # signed integer constant
+    result.add(Opcode.PSH.ord)
+    result.add(((int32)parseInt(instruction)).toBytes)
+
 proc compileInstruction(self: DEngineCompiler, instruction: string): seq[uint8] =
   ## Compiles a single '.den' instruction, like 'add'
   result = @[]
@@ -19,8 +29,7 @@ proc compileInstruction(self: DEngineCompiler, instruction: string): seq[uint8] 
     result.add(opcodeByte)
   else:
     # Assume this is a constant or variable reference being pushed
-    result.add(Opcode.PSH.ord)
-    result.add(parseFloat(instruction).toBytes)
+    result.add(self.parseNonOpcode(instruction))
 
 # TODO: test
 proc compile*(self: DEngineCompiler, source: string): seq[uint8] =

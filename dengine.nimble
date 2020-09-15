@@ -10,3 +10,6 @@ bin           = @["dengine"]
 # Dependencies
 
 requires "nim >= 1.2.6"
+
+task tests, "Run tests":
+  exec "nimble test --silent"

@@ -14,6 +14,7 @@ type
     programSize: int ## Holds the length of the currently loaded program
     ip*: int32 ## Instruction pointer (starts at the beginning of memory)
 
+# TODO: test
 proc init*(self: DEngineRuntime, memSize: int = 512) =
   ## Initialize DEngineRuntime
 
@@ -31,6 +32,7 @@ proc load*(self: DEngineRuntime, program: seq[uint8]) =
   self.programSize = program.len
   self.ip = 0 # Start the instruction pointer at the beginning of memory
 
+# TODO: test
 proc reset*(self: DEngineRuntime) =
   self.ip = 0
   self.stack.reset()

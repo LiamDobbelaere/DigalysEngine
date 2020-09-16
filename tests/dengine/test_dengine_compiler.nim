@@ -24,7 +24,7 @@ suite "DEngineCompiler - snapshot tests":
       5.54
     """)
 
-    doAssert result == [(uint8)Opcode.PSH, 174u8, 71, 177, 64]
+    doAssert result == [(uint8)Opcode.PSH, 174'u8, 71, 177, 64]
 
   test "push constant integer value":
     let result = compiler.compile("""

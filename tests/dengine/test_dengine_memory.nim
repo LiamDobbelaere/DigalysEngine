@@ -18,7 +18,7 @@ suite "DEngineMmemory":
     doAssert memory.get(16) == testValue, "should put the value in the specific memory location"
 
   test "put(int, openArray[uint8])":
-    const testValues = @[100u8, 110, 20, 16]
+    const testValues = @[100'u8, 110, 20, 16]
 
     memory.init(64)
     memory.put(16, testValues)
@@ -27,7 +27,7 @@ suite "DEngineMmemory":
       doAssert memory.get(16 + idx) == val, "should put the values in the specific memory locations"
 
   test "getDword(int)":
-    const testValues = @[100u8, 110, 20, 16]
+    const testValues = @[100'u8, 110, 20, 16]
 
     memory.init(64)
     memory.put(16, testValues)

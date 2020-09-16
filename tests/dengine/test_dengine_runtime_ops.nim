@@ -38,8 +38,8 @@ suite "DEngineRuntime operations":
     doAssert stack.popDword() == 6.0.toBytes, "should add the two float32s on the stack, pushing the resulting float32 to the stack"
 
   test "op_push":
-    memory.put(1, [1u8, 2, 3, 4])
+    memory.put(1, [1'u8, 2, 3, 4])
 
     op_push(ip, memory, stack)
 
-    doAssert stack.popDword() == [1u8, 2, 3, 4], "should push the Dword in memory to the stack"
+    doAssert stack.popDword() == [1'u8, 2, 3, 4], "should push the Dword in memory to the stack"

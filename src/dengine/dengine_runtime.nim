@@ -14,12 +14,12 @@ type
     programSize: int ## Holds the length of the currently loaded program
     ip*: int32 ## Instruction pointer (starts at the beginning of memory)
 
-proc init*(self: DEngineRuntime) =
+proc init*(self: DEngineRuntime, memSize: int = 512) =
   ## Initialize DEngineRuntime
 
   # Set up memory, fixed at 512 bytes large for now
   self.memory = DEngineMemory()
-  self.memory.init(512)
+  self.memory.init(memSize)
 
   self.stack = DEngineStack()
   self.stack.init(self.memory)
@@ -30,6 +30,10 @@ proc load*(self: DEngineRuntime, program: seq[uint8]) =
   self.memory.put(0, program)
   self.programSize = program.len
   self.ip = 0 # Start the instruction pointer at the beginning of memory
+
+proc reset*(self: DEngineRuntime) =
+  self.ip = 0
+  self.stack.reset()
 
 proc execute(self: Opcode, runtime: DEngineRuntime) =
   ## Maps opcodes to procedures that handle them and executes it

@@ -12,6 +12,10 @@ proc init*(self: DEngineStack, memory: DEngineMemory) =
   self.memory = memory
   self.sp = (int32)self.memory.max
 
+# TODO: test
+proc reset*(self: DEngineStack) =
+  self.sp = (int32)self.memory.max
+
 proc push*(self: DEngineStack, value: uint8) =
   ## Push a single value to the stack
   self.memory.put(self.sp, value)

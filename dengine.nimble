@@ -13,3 +13,6 @@ requires "nim >= 1.2.6"
 
 task tests, "Run tests":
   exec "nimble test --silent"
+
+task bench, "Run benchmark":
+  exec "nim c --hints:off --outdir=build -r ./benchmark/test_dengine_runtime_benchmark.nim"

@@ -16,39 +16,39 @@ suite "DEngineStack":
   teardown:
     discard
 
-  test "init":
-    doAssert stack.sp == memory.max
+  test "init()":
+    doAssert stack.sp == memory.max, "should set the stack pointer to the end of memory"
 
-  test "push single":
+  test "push(uint8)":
     stack.push(5)
 
-    doAssert stack.sp == memory.max - 1
-    doAssert memory.get(memory.max) == 5
+    doAssert stack.sp == memory.max - 1, "should decrease stack pointer back by one"
+    doAssert memory.get(memory.max) == 5, "should put the value at the pre-call stack pointer's location"
 
-  test "push multiple":
+  test "push(openArray[uint8])":
     stack.push([5u8, 6])
 
-    doAssert stack.sp == memory.max - 2
-    doAssert memory.get(memory.max) == 5
-    doAssert memory.get(memory.max - 1) == 6
+    doAssert stack.sp == memory.max - 2, "should decrease stack pointer by the length of the input values"
+    doAssert memory.get(memory.max) == 5, "should put the values in memory, starting at the pre-call stack pointer's location"
+    doAssert memory.get(memory.max - 1) == 6, "should put the values in memory, starting at the pre-call stack pointer's location"
 
-  test "push multiple reverse":
+  test "pushReverse(openArray[uint8])":
     stack.pushReverse([5u8, 6])
 
-    doAssert stack.sp == memory.max - 2
-    doAssert memory.get(memory.max) == 6
-    doAssert memory.get(memory.max - 1) == 5
+    doAssert stack.sp == memory.max - 2, "should decrease stack pointer by the length of the input values"
+    doAssert memory.get(memory.max) == 6, "should put the values in memory in reverse, starting at the pre-call stack pointer's location"
+    doAssert memory.get(memory.max - 1) == 5, "should put the values in memory in reverse, starting at the pre-call stack pointer's location"
 
-  test "pop single":
+  test "pop()":
     stack.push([5u8, 6])
     let poppedValue = stack.pop()
 
-    doAssert poppedValue == 6
-    doAssert stack.sp == memory.max - 1
+    doAssert poppedValue == 6, "should return the value that was at the top of the stack"
+    doAssert stack.sp == memory.max - 1, "should decrease stack pointer by one"
 
-  test "pop dword":
+  test "popDword()":
     stack.push([5u8, 6, 7, 8, 9, 10, 11, 12])
     let poppedValue = stack.popDword()
 
-    doAssert poppedValue == [12u8, 11, 10, 9]
-    doAssert stack.sp == memory.max - 4
+    doAssert poppedValue == [12u8, 11, 10, 9], "should return the Dword that was at the top of the stack"
+    doAssert stack.sp == memory.max - 4, "should decrease stack pointer by 4 (size of a Dword)"

@@ -13,11 +13,11 @@ proc init*(self: DEngineCompiler) =
 proc parseNonOpcode(self: DEngineCompiler, instruction: string): seq[uint8] =
   if instruction.contains("."):
     # float constant
-    result.add(Opcode.PSHF.ord)
+    result.add(Opcode.PSH.ord)
     result.add(((float32)parseFloat(instruction)).toBytes)
   else:
     # signed integer constant
-    result.add(Opcode.PSHI.ord)
+    result.add(Opcode.PSH.ord)
     result.add(((int32)parseInt(instruction)).toBytes)
 
 proc compileInstruction(self: DEngineCompiler, instruction: string): seq[uint8] =

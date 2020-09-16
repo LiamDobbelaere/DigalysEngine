@@ -23,6 +23,8 @@ when isMainModule:
   compiler.init()
 
   let compiledCode = compiler.compile("""
+    5
+    out
     10.3
     0.5
     addf

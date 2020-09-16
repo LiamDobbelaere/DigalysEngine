@@ -33,3 +33,10 @@ suite "DEngineMmemory":
     memory.init(4096)
     doAssert memory.size == 4096
 
+  test "max()":
+    memory.init(64)
+    doAssert memory.max == 63
+
+    memory.init(4096)
+    doAssert memory.max == 4095
+

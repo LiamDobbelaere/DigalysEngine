@@ -24,11 +24,11 @@ suite "DEngineCompiler - snapshot tests":
       5.54
     """)
 
-    doAssert result == [(uint8)Opcode.PSHF, 174u8, 71, 177, 64]
+    doAssert result == [(uint8)Opcode.PSH, 174u8, 71, 177, 64]
 
   test "push constant integer value":
     let result = compiler.compile("""
       123456789
     """)
 
-    doAssert result == [(uint8)Opcode.PSHI, 21, 205, 91, 7]
+    doAssert result == [(uint8)Opcode.PSH, 21, 205, 91, 7]

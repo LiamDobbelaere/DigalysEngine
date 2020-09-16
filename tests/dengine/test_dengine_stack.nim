@@ -32,6 +32,13 @@ suite "DEngineStack":
     doAssert memory.get(memory.max) == 5
     doAssert memory.get(memory.max - 1) == 6
 
+  test "push multiple reverse":
+    stack.pushReverse([5u8, 6])
+
+    doAssert stack.sp == memory.max - 2
+    doAssert memory.get(memory.max) == 6
+    doAssert memory.get(memory.max - 1) == 5
+
   test "pop single":
     stack.push([5u8, 6])
     let poppedValue = stack.pop()

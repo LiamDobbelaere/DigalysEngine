@@ -26,6 +26,14 @@ suite "DEngineMmemory":
     for idx, val in pairs(testValues):
       doAssert memory.get(16 + idx) == val
 
+  test "getDword":
+    const testValues = @[100u8, 110, 20, 16]
+
+    memory.init(64)
+    memory.put(16, testValues)
+
+    doAssert memory.getDword(16) == testValues
+
   test "size initialization":
     memory.init(64)
     doAssert memory.size == 64

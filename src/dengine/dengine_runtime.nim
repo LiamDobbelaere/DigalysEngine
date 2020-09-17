@@ -39,12 +39,14 @@ proc reset*(self: DEngineRuntime) =
 
 proc execute(self: Opcode, runtime: DEngineRuntime) =
   ## Maps opcodes to procedures that handle them and executes it
-  {
-    Opcode.ADDI: op_add_int32,
-    Opcode.ADDF: op_add_float32,
-    Opcode.PSH: op_push,
-    Opcode.OUT: op_out
-  }.toTable[self](runtime.ip, runtime.memory, runtime.stack)
+  if self == Opcode.ADDI:
+    op_add_int32(runtime.ip, runtime.memory, runtime.stack)
+  elif self == Opcode.ADDF:
+    op_add_float32(runtime.ip, runtime.memory, runtime.stack)
+  elif self == Opcode.PSH:
+    op_push(runtime.ip, runtime.memory, runtime.stack)
+  elif self == Opcode.OUT:
+    op_out(runtime.ip, runtime.memory, runtime.stack)
 
 # TODO: test
 proc tick*(self: DEngineRuntime) =

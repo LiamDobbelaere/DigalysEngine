@@ -24,8 +24,10 @@ proc get*(self: DEngineMemory, i: int): uint8 =
 
 proc getDword*(self: DEngineMemory, i: int): array[4, uint8] =
   ## Retrieve a Dword in memory at location i
-  for j in 0..3:
-    result[j] = self.memory[i + j]
+  result[0] = self.memory[i]
+  result[1] = self.memory[i + 1]
+  result[2] = self.memory[i + 2]
+  result[3] = self.memory[i + 3]
 
 proc max*(self: DEngineMemory): int =
   ## Get the highest possible address in memory

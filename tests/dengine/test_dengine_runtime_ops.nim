@@ -22,16 +22,16 @@ suite "DEngineRuntime operations":
     discard
 
   test "op_add_int32":
-    stack.pushReverse(5.toBytes)
-    stack.pushReverse(4.toBytes)
+    stack.pushDwordReverse(5.toBytes)
+    stack.pushDwordReverse(4.toBytes)
 
     op_add_int32(ip, memory, stack)
 
     doAssert stack.popDword() == 9.toBytes, "should add the two int32s on the stack, pushing the resulting int32 to the stack"
 
   test "op_add_float32":
-    stack.pushReverse(5.5.toBytes)
-    stack.pushReverse(0.5.toBytes)
+    stack.pushDwordReverse(5.5.toBytes)
+    stack.pushDwordReverse(0.5.toBytes)
 
     op_add_float32(ip, memory, stack)
 

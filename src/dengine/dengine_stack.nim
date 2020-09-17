@@ -27,11 +27,13 @@ proc push*(self: DEngineStack, values: openArray[uint8]) =
     self.memory.put(self.sp - i, values[i])
   self.sp -= (int32)values.len
 
-proc pushReverse*(self: DEngineStack, values: openArray[uint8]) =
-  ## Push an array of multiple values to the stack, but read values in reverse
-  for i in 0..<values.len:
-    self.memory.put(self.sp - i, values[values.len - 1 - i])
-  self.sp -= (int32)values.len
+proc pushDwordReverse*(self: DEngineStack, values: array[4, uint8]) =
+  ## Push a Dword to the stack, but read values in reverse
+  self.memory.put(self.sp, values[values.len - 1])
+  self.memory.put(self.sp - 1, values[values.len - 1 - 1])
+  self.memory.put(self.sp - 2, values[values.len - 1 - 2])
+  self.memory.put(self.sp - 3, values[values.len - 1 - 3])
+  self.sp -= 4
 
 proc pop*(self: DEngineStack): uint8 =
   ## Pop a value from the stack
@@ -41,6 +43,8 @@ proc pop*(self: DEngineStack): uint8 =
 proc popDword*(self: DEngineStack): array[4, uint8] =
   ## Pop a double word from the stack, more efficient than popping a variable amount
   ## from the stack since no heap is involved
-  for i in 0..3:
-    self.sp += 1
-    result[i] = self.memory.get(self.sp)
+  result[0] = self.memory.get(self.sp + 1)
+  result[1] = self.memory.get(self.sp + 2)
+  result[2] = self.memory.get(self.sp + 3)
+  result[3] = self.memory.get(self.sp + 4)
+  self.sp += 4

@@ -1,4 +1,5 @@
 import tables
+import strutils
 
 type Opcode* = enum
   NOP = 0,  ## do absolutely nothing
@@ -17,5 +18,13 @@ let stringToOpcode* = { ## Quick conversion table to convert strings to opcodes
 proc toOpcode*(str: string): Opcode =
   result = stringToOpcode[str]
 
-proc validOpcode*(str: string): bool =
+proc isValidOpcode*(str: string): bool =
   result = str in stringToOpcode
+
+# TODO: test
+proc isLabel*(str: string): bool =
+  result = str.endsWith(":")
+
+# TODO: test
+proc isReference*(str: string): bool =
+  result = str.startsWith("&")

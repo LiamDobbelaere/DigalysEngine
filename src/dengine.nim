@@ -24,10 +24,13 @@ when isMainModule:
 
   let compiledCode = compiler.compile("""
     main:
-      &fib
-    
-    fib:
-      7
+      0
+      &count jmp
+
+    count:
+      1 addi
+      dup out
+      &count jmp
   """)
 
   let runtime = DEngineRuntime()

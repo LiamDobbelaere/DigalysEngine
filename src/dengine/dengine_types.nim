@@ -7,11 +7,15 @@ type Opcode* = enum
   ADDF = 2, ## add the top two values on the stack, reading them as float32
   PSH = 3,  ## push the next value to the stack as an int32
   OUT = 4,  ## output the value on the stack as text
+  JMP = 5,  ## interpret the top value on the stack as a location in memory and set the ip to that location
+  DUP = 6,  ## duplicate the value on top of the stack
 
 let stringToOpcode* = { ## Quick conversion table to convert strings to opcodes
   "nop": Opcode.NOP,
   "addi": Opcode.ADDI,
   "addf": Opcode.ADDF,
+  "jmp": Opcode.JMP,
+  "dup": Opcode.DUP,
   "out": Opcode.OUT
 }.toTable
 

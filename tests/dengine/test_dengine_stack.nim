@@ -54,3 +54,10 @@ suite "DEngineStack":
 
     doAssert poppedValue == [12'u8, 11, 10, 9], "should return the Dword that was at the top of the stack"
     doAssert stack.sp == memory.max - 4, "should decrease stack pointer by 4 (size of a Dword)"
+
+  test "peekDword()":
+    stack.push([5'u8, 6, 7, 8, 9, 10, 11, 12])
+    let stackValue = stack.peekDword()
+
+    doAssert stackValue == [12'u8, 11, 10, 9], "should return the Dword that was at the top of the stack, without popping it"
+    doAssert stack.sp == memory.max - 8, "should leave the stack pointer as it was"

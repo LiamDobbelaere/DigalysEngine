@@ -45,6 +45,12 @@ proc execute(self: Opcode, runtime: DEngineRuntime) =
     op_add_float32(runtime.ip, runtime.memory, runtime.stack)
   elif self == Opcode.PSH:
     op_push(runtime.ip, runtime.memory, runtime.stack)
+  elif self == Opcode.JMP:
+    op_jump(runtime.ip, runtime.memory, runtime.stack)
+  elif self == Opcode.DUP:
+    op_duplicate(runtime.ip, runtime.memory, runtime.stack)
+  elif self == Opcode.NOP:
+    op_nop(runtime.ip, runtime.memory, runtime.stack)
   elif self == Opcode.OUT:
     op_out(runtime.ip, runtime.memory, runtime.stack)
 
@@ -52,7 +58,6 @@ proc execute(self: Opcode, runtime: DEngineRuntime) =
 proc tick*(self: DEngineRuntime) =
   ## Grab the current instruction, interpret it as an opcode and execute it
   ((Opcode)self.memory.get(self.ip)).execute(self)
-  self.ip += 1
 
 # TODO: test
 proc run*(self: DEngineRuntime) =

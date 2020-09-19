@@ -42,9 +42,17 @@ proc pop*(self: DEngineStack): uint8 =
 
 proc popDword*(self: DEngineStack): array[4, uint8] =
   ## Pop a double word from the stack, more efficient than popping a variable amount
-  ## from the stack since no heap is involved
+  ## from the stack since no heap is involved for seq allocation
   result[0] = self.memory.get(self.sp + 1)
   result[1] = self.memory.get(self.sp + 2)
   result[2] = self.memory.get(self.sp + 3)
   result[3] = self.memory.get(self.sp + 4)
   self.sp += 4
+
+# TODO: test
+proc peekDword*(self: DEngineStack): array[4, uint8] =
+  ## Peek what double word is on the stack
+  result[0] = self.memory.get(self.sp + 1)
+  result[1] = self.memory.get(self.sp + 2)
+  result[2] = self.memory.get(self.sp + 3)
+  result[3] = self.memory.get(self.sp + 4)

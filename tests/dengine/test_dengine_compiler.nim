@@ -32,3 +32,24 @@ suite "DEngineCompiler - snapshot tests":
     """)
 
     doAssert result == [(uint8)Opcode.PSH, 21, 205, 91, 7]
+
+  test "do nothing (nop)":
+    let result = compiler.compile("""
+      nop
+    """)
+
+    doAssert result == [(uint8)Opcode.NOP]
+
+  test "jump to label":
+    let result = compiler.compile("""
+      main:
+        &test
+        jmp
+      
+      test:
+        &main
+        jmp
+    """)
+
+    doAssert result == [(uint8)Opcode.PSH, 6, 0, 0, 0, (uint8)Opcode.JMP, (
+        uint8)Opcode.PSH, 0, 0, 0, 0, (uint8)Opcode.JMP]

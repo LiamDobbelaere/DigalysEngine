@@ -45,3 +45,6 @@ suite "DEngineRuntime benchmarks":
   test "push 2 floats and addf":
     benchCode("5.3 1.4 addf")
 
+  test "jump to a label":
+    benchCode("main: &test jmp test: nop")
+

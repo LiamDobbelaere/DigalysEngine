@@ -23,23 +23,22 @@ when isMainModule:
   compiler.init()
 
   let compiledCode = compiler.compile("""
-    5
-    out
-    10.3
-    0.5
-    addf
-    out
-    10
-    8
-    addi
-    out
+    main:
+      0
+      &count jmp
+
+    count:
+      1 addi
+      dup out
+      &count jmp
   """)
 
   let runtime = DEngineRuntime()
   runtime.init()
 
-  echo "Bytecode size: " & $compiledCode.len & " bytes"
-  echo "VM output:"
+  echo compiledCode
+  #echo "Bytecode size: " & $compiledCode.len & " bytes"
+  #echo "VM output:"
   runtime.load(compiledCode)
   runtime.run()
 
